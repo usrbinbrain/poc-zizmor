@@ -9,15 +9,14 @@ on:
 jobs:
   scan-job:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DANN_VULN_API_KEY: "simulado123456789"
+      SECRET_DATABASE_PASSWORD: "minhaSenhaparaBaseDeDados"
     
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set environment variables
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DANN_VULN_API_KEY: "simulado123456789"
-          SECRET_DATABASE_PASSWORD: "minhaSenhaparaBaseDeDados"
+      - name: Checkout repository
+        uses: actions/checkout@v3
       
       - name: Install Dann Vuln CLI
         run: |
@@ -28,3 +27,4 @@ jobs:
           dann vuln scan \
             --api-key $DANN_VULN_API_KEY \
             --database-password $SECRET_DATABASE_PASSWORD
+
