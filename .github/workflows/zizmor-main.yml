@@ -1,0 +1,19 @@
+name: Install zizmor
+
+on:
+  workflow_dispatch:  # Permite executar o workflow manualmente
+
+jobs:
+  install-zizmor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install zizmor
+        run: |
+          cargo install --git https://github.com/woodruffw/zizmor
+
+      - name: Run zizmor scan
+        run: |
+          zizmor bad-workflow.yml
