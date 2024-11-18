@@ -1,0 +1,36 @@
+name: Dann Vuln Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan-job:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DANN_VULN_API_KEY: "simulado123456789"
+      SECRET_DATABASE_PASSWORD: "minhaSenhaparaBaseDeDados"
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Install Dann Vuln CLI
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/dann-vuln/cli/main/install.sh | sh
+        
+      - name: Run Dann Vuln Scan
+        run: |
+          dann vuln scan \
+            --api-key $DANN_VULN_API_KEY \
+            --database-password $SECRET_DATABASE_PASSWORD
+
+      - name: Display RSA Key (Dangerous Step)
+        run: |
+          echo "-----BEGIN RSA PRIVATE KEY-----
+          MIIEpAIBAAKCAQEAvBPJ2fq4YjHgJqN0R1PUnNFnJxZ9Z7XzGv0sFGWkmZq1Y4Bn
+          9BtK1R5ksSKzmPf1gXg6TkCM/l6A4FIZKgFZ4Ba0ClKd9bQxxEd4tFs0iEIVsK5R
+          -----END RSA PRIVATE KEY-----"

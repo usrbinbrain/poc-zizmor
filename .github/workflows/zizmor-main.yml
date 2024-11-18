@@ -13,7 +13,11 @@ jobs:
       - name: Install zizmor
         run: |
           cargo install --git https://github.com/woodruffw/zizmor
-
-      - name: Run zizmor scan
+      
+      - name: Run zizmor offline scan (no exit code)
+        run: |
+          zizmor --offline --no-exit-codes ./
+      
+      - name: Run zizmor offline scan
         run: |
           zizmor --offline bad-workflow.yml
