@@ -16,4 +16,4 @@ jobs:
 
       - name: Run zizmor scan
         run: |
-          zizmor bad-workflow.yml
+          zizmor --offline bad-workflow.yml
