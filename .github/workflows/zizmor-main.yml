@@ -16,7 +16,7 @@ jobs:
       
       - name: Run zizmor offline scan (no exit code)
         run: |
-          zizmor --offline --no-exit-codes ./
+          zizmor --offline --no-exit-codes very-bad-workflow.yml
       
       - name: Run zizmor offline scan
         run: |
